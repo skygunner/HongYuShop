@@ -19,11 +19,14 @@ class IndexController extends Controller {
 //        }
 //    }
 
-    function index(){
+    public function index(){
         $this->display();
     }
 
-    function login(){
+    public function main(){
+        $this->display();
+    }
+    public function login(){
         if($_POST){
             $model = D('Admin');
             if($model->create($_POST, 4)){

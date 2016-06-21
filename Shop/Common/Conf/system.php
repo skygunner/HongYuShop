@@ -8,7 +8,7 @@
 
 return array(
     'URL_MODEL' =>  1,     //url 模式设置
-    'SHOW_PAGE_TRACE'   =>  True,    //Behavior 行为,让页面显示追踪日志信息  True/False
+    //'SHOW_PAGE_TRACE'   =>  True,    //Behavior 行为,让页面显示追踪日志信息  True/False
     'URL_CASE_INSENSITIVE'  =>  True,   //不区分大小写
     'LANG_SWITCH_ON' => true,   // 开启语言包功能
     'LANG_AUTO_DETECT' => true,     // 自动侦测语言 开启多语言功能后有效
