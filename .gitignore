@@ -1,3 +1,5 @@
-.idea
-.git
+# JetBrains Rider
+.git/
+.idea/
+*.sln.iml
 Runtime/
