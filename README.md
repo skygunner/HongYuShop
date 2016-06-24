@@ -1,10 +1,11 @@
-﻿## HTML常用class
+﻿## Bootstrap常用class
 * breadcrumb  (设置背景色为 #F5F5F5)
 * container （固定宽度）
 * container-fluid （100% 宽度）
 * checked   (checkbox多选复选框选中)
 * col-sm-offset-1   (左边空出 sm-1 距离)
 * console.log()     (代替alert弹出对话框)
+* center-block  (让内容块居中)
 
 ## ThinkPHP
 * {include file="Shop/Home/View/Public/header.html"}    (引入HTML模板文件)
