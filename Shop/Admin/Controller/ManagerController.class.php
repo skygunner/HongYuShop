@@ -71,13 +71,30 @@ class ManagerController extends IndexController {
     //删除管理员
     public function delAdmin($id){
         if($id > 1){
-            $admin = M('Admin');
-            $admin->delete($id);
+            $model = M('Admin');
+            $model->delete($id);
         }
         $this->success('删除成功',U('Manager/listAdmin'));
     }
 
-
+    //批量删除管理员
+    public function delLotAdmin(){
+        $dellotid = I('post.dellot');
+        if($dellotid){
+            $key = array_search(1,$dellotid);
+            if($key !== false){
+                unset($dellotid[$key]);
+            }
+            if($dellotid){
+                $dellotid = implode(',',$dellotid);
+                $model = M('Admin');
+                $model -> delete($dellotid);
+            }
+            $this->success('删除成功',U('Manager/listAdmin'));
+        }else{
+            $this->error('请选择删除的管理员',U('Manager/listAdmin'));
+        }
+    }
 
     public function system(){
         $info = array(
@@ -104,7 +121,5 @@ class ManagerController extends IndexController {
 
     public function show(){
         $model = D("Admin");
-
-        querySql($model);
     }
 }

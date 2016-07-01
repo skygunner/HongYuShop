@@ -30,65 +30,76 @@
                 <div class="ibox-title">
                     <h5>管理员列表</h5>
                 </div>
-                <div class="ibox-content">
-                    <div class="row" style="margin-bottom: 8px;">
-                        <div class="col-sm-1 m-b-xs">
-                            <select class="input-sm form-control input-s-sm inline">
-                                <option value="0">请选择</option>
-                                <option value="1">选项1</option>
-                                <option value="2">选项2</option>
-                                <option value="3">选项3</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="input-group">
-                                <input type="text" placeholder="请输入关键词" class="input-sm form-control"> <span class="input-group-btn">
-                                        <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
+                <form action="__CONTROLLER__/delLotAdmin" method="post"  name="listForm">
+                    <div class="ibox-content">
+                        <div class="row" style="margin-bottom: 8px;">
+                            <div class="col-sm-1 m-b-xs">
+                                <select class="input-sm form-control input-s-sm inline">
+                                    <option value="0">请选择</option>
+                                    <option value="1">选项1</option>
+                                    <option value="2">选项2</option>
+                                    <option value="3">选项3</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="input-group">
+                                    <input type="text" placeholder="请输入关键词" class="input-sm form-control"> <span class="input-group-btn">
+                                    <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2 pull-right text-center">
+                                <button type="button" class="btn btn-primary btn-sm " onclick="addAdmin()"><i class="fa fa-plus"></i>&nbsp;添加管理员</button>
+                                <button type="submit" class="btn btn-danger btn-sm" style="margin-left: 10px"><i class="fa fa-trash-o"></i>&nbsp;删除所选</button>
                             </div>
                         </div>
-                        <div class="col-sm-2 pull-right">
-                            <button type="button" class="btn btn-primary btn-sm center-block" onclick="addAdmin()"><i class="fa fa-plus"></i>&nbsp;添加管理员</button>
-                        </div>
-                    </div>
-                    <table class="table table-bordered table-hover ">
-                        <thead>
-                            <tr>
-                                <th class="text-center" width="50">编号</th>
-                                <th class="text-center" width="168">管理员名称</th>
-                                <th class="text-center" width="128">用户组</th>
-                                <th class="text-center" width="128">手机号</th>
-                                <th class="text-center" width="168">邮箱</th>
-                                <th class="text-center" width="168">注册时间</th>
-                                <th class="text-center" width="168">最后登录时间</th>
-                                <th class="text-center" width="168">操作</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <volist name="list" id="v">
+                        <table class="table table-bordered table-hover ">
+                            <thead>
                                 <tr>
-                                    <td class="text-center">{$v.id}</td>
-                                    <td class="text-center">{$v.username}</td>
-                                    <td class="text-center">管理员</td>
-                                    <td class="text-center">{$v.mobile_phone}</td>
-                                    <td class="text-center">{$v.email}</td>
-                                    <td class="text-center">{$v.reg_time}</td>
-                                    <td class="text-center">{$v.last_login}</td>
-                                    <td class="text-center">
-                                        <a href="#" class="btn btn-warning btn-xs" style="margin-bottom:0;"><i class="fa fa-key"></i>&nbsp;权限</a>
-                                        <a href="__CONTROLLER__/saveAdmin/id/{$v.id}" class="btn btn-info btn-xs" style="margin-bottom:0;margin-left: 10px;margin-right: 10px;"><i class="fa fa-paste"></i>&nbsp;编辑</a>
-                                        <a href="__CONTROLLER__/delAdmin/id/{$v.id}" class="btn btn-danger btn-xs" onclick="return confirm('确定要删除吗？');" style="margin-bottom:0;"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
-                                    </td>
+                                    <th class="text-center" style="width: 36px; "><div class="th-inner"><input id="select" type="checkbox"></div></th>
+                                    <th class="text-center" width="50">编号</th>
+                                    <th class="text-center" width="168">管理员名称</th>
+                                    <th class="text-center" width="128">用户组</th>
+                                    <th class="text-center" width="128">手机号</th>
+                                    <th class="text-center" width="168">邮箱</th>
+                                    <th class="text-center" width="168">注册时间</th>
+                                    <th class="text-center" width="168">最后登录时间</th>
+                                    <th class="text-center" width="168">操作</th>
                                 </tr>
-                            </volist>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="10" style="text-align: center;">{$page}</td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
+                            </thead>
+
+                            <tbody>
+                                <volist name="list" id="v">
+                                    <tr>
+                                        <if condition="$v[id] neq '1'">
+                                        <td class="text-center" style="width: 36px;"><div class="th-inner"><input class="select" name="dellot[]" type="checkbox" value="{$v.id}"></div></td>
+                                        <else /><td class="text-center" style="width: 36px;"></td>
+                                        </if>
+                                        <td class="text-center">{$v.id}</td>
+                                        <td class="text-center">{$v.username}</td>
+                                        <td class="text-center">管理员</td>
+                                        <td class="text-center">{$v.mobile_phone}</td>
+                                        <td class="text-center">{$v.email}</td>
+                                        <td class="text-center">{$v.reg_time}</td>
+                                        <td class="text-center">{$v.last_login}</td>
+                                        <td class="text-center">
+                                            <a href="__CONTROLLER__/saveAdmin/id/{$v.id}" class="btn btn-info btn-xs" style="margin-bottom:0;margin-left: 10px;margin-right: 10px;"><i class="fa fa-paste"></i>&nbsp;编辑</a>
+                                            <if condition="$v[id] neq '1'">
+                                            <a href="__CONTROLLER__/delAdmin/id/{$v.id}" class="btn btn-danger btn-xs" onclick="return confirm('确定要删除吗？');" style="margin-bottom:0;"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+                                            </if>
+                                        </td>
+                                    </tr>
+                                </volist>
+                            </tbody>
+
+                            <tfoot>
+                                <tr>
+                                    <td colspan="10" style="text-align: center;">{$page}</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -99,7 +110,7 @@
             <div class="form-group">
                 <label class="col-sm-4 control-label">用户名：</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" name="adminname" placeholder="（必填）">
+                    <input type="text" class="form-control" name="username" placeholder="（必填）">
                 </div>
             </div>
             <div class="form-group">
@@ -132,6 +143,13 @@
 <script src="{$Think.PUBLIC_URL}js/content.min.js?v=1.0.0"></script>
 <script src="{$Think.PUBLIC_URL}js/plugins/layer/layer.min.js"></script>
 <script>
+    $("#select").click(function(){
+       if($(this).prop("checked"))
+            $(".select").prop("checked","checked");
+        else
+           $(".select").removeAttr("checked");
+
+    });
     function addAdmin(){
         layer.open({
             type: 1,

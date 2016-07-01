@@ -6,11 +6,13 @@
 * col-sm-offset-1   (左边空出 sm-1 距离)
 * console.log()     (代替alert弹出对话框)
 * center-block  (让内容块居中)
+* text-center   (让元素内文字或者内容块居中)
 
 ## ThinkPHP
 * {include file="Shop/Home/View/Public/header.html"}    (引入HTML模板文件)
 * 自动加载-自定义函数库   (应用目录/Common/Common/function.php)
 * var_dump(get_defined_constants(true));  (显示系统变量)
+* {:U('Admin/Index/index')} 跨模块链接跳转
 * 网址跳转  ( $this -> success('注册成功',U('Index/login')); )
 * 验证码验证判断
     $verify = new \Think\Verify();
@@ -31,6 +33,7 @@
 
 
 ## JS
+* attr() prop()
 * onclick="this.src='图片src地址'"  (单击刷新图片验证码,可放到<img>标签中)
 * document.getElementById("元素ID").click();  (触发元素单击事件-并打开链接)
 * document.documentElement.scrollTop = document.body.scrollTop =0;  (返回顶部)

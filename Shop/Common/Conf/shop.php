@@ -19,7 +19,7 @@ define("SHOP_NAME_JANE","鸿宇");   // {$Think.const.SHOP_NAME_JANE}
 define("SHOP_NAME","鸿宇多用户商城");     //  {$Think.const.SHOP_NAME}
 
 //商城首页标题
-define("SHOP_TILE","鸿宇多用户商城 - hongyuvip.com");    //  {$Think.const.SHOP_TILE}
+define("SHOP_TILE","鸿宇多用户商城 - HongYuVip.com");    //  {$Think.const.SHOP_TILE}
 
 return array(
     //'配置项'=>'配置值'

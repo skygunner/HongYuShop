@@ -1,12 +1,62 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Shadow
+ * Date: 2016/6/8
+ * Time: 10:32
+ */
 namespace Home\Controller;
-
 use Think\Controller;
-
-class IndexController extends Controller
-{
-    public function index()
-    {
-        $this->show('<style type="text/css">*{ padding: 0; margin: 0; } div{ padding: 4px 48px;} body{ background: #fff; font-family: "微软雅黑"; color: #333;font-size:24px} h1{ font-size: 100px; font-weight: normal; margin-bottom: 12px; } p{ line-height: 1.8em; font-size: 36px } a,a:hover{color:blue;}</style><div style="padding: 24px 48px;"> <h1>:)</h1><p>欢迎使用 <b>ThinkPHP</b>！</p><br/>版本 V{$Think.version}</div><script type="text/javascript" src="http://ad.topthink.com/Public/static/client.js"></script><thinkad id="ad_55e75dfae343f5a1"></thinkad><script type="text/javascript" src="http://tajs.qq.com/stats?sId=9347272" charset="UTF-8"></script>','utf-8');
+class IndexController extends Controller {
+    public function __construct(){
+        parent::__construct();
+        session_start();
+        if($_SESSION['username'] == ""){
+            $this->assign('username','N');
+        }else{
+            $this->assign('username',$_SESSION['username']);
+        }
     }
+
+    public function index(){
+        $this->display();
+    }
+
+    public function show(){
+        //调试输出函数
+    }
+
+    public function register11(){
+        if(!empty($_POST)){
+            //验证码校验
+            $verify = new \Think\Verify();
+            if(!$verify->check($_POST['captcha'])){
+                echo "验证码错误";
+            } else {
+                //判断用户名和密码，在model模型里边制作一个专门方法进行验证
+                $user = new \Model\ManagerModel();
+                $rst = $user -> checkNamePwd($_POST['mg_username'],$_POST['mg_password']);
+                if($rst === false){
+                    echo "用户名或密码错误";
+                } else {
+                    //登录信息持久化$_SESSION
+                    session('mg_username',$rst['mg_name']);
+                    session('mg_id',$rst['mg_id']);
+                    //$this ->redirect($url, $params, $delay, $msg)
+                    //$this -> redirect('Index/index',array('id'=>100,'name'=>'tom'),2,'用户马上登陆到后台');
+                    $this -> redirect('Index/index');
+                }
+            }
+        }
+        $this -> assign('lang',L());
+        $this -> display();
+    }
+
+
+    //多语言切换
+    public function lang(){
+        $this -> assign('lang',L());
+        $this -> display();
+    }
+
 }
